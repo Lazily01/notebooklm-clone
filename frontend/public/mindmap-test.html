@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>思维导图渲染器测试 - Miniblink 兼容版</title>
+  <link rel="stylesheet" href="mindmap-renderer.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+    }
+    .page-container {
+      display: -webkit-box;
+      display: flex;
+      height: 100vh;
+    }
+    .editor-panel {
+      width: 40%;
+      border-right: 1px solid #ddd;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-orient: vertical;
+      flex-direction: column;
+    }
+    .preview-panel {
+      width: 60%;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-orient: vertical;
+      flex-direction: column;
+    }
+    .panel-header {
+      padding: 15px 20px;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .editor-content {
+      -webkit-box-flex: 1;
+      flex: 1;
+      padding: 20px;
+      overflow: auto;
+    }
+    textarea {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 12px;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      resize: none;
+    }
+    .button-group {
+      padding: 15px 20px;
+      border-top: 1px solid #ddd;
+      background: #fafafa;
+    }
+    button {
+      padding: 8px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    button:active {
+      background: #3d8b40;
+    }
+    .mindmap-container {
+      -webkit-box-flex: 1;
+      flex: 1;
+    }
+    .info-box {
+      padding: 15px 20px;
+      background: #e3f2fd;
+      border-bottom: 1px solid #90caf9;
+      font-size: 12px;
+      color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <div class="editor-panel">
+      <div class="panel-header">Markdown 编辑器</div>
+      <div class="info-box">
+        <strong>语法说明：</strong><br>
+        # 根主题<br>
+        &nbsp;&nbsp;- 一级分支<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;- 二级分支<br>
+        每 2 个空格为 1 级缩进
+      </div>
+      <div class="editor-content">
+        <textarea id="markdown-input"># 人工智能发展史
+  - 起源阶段
+    - 1950年代
+      - 图灵测试提出
+      - 达特茅斯会议
+    - 1960年代
+      - 专家系统诞生
+      - 自然语言处理起步
+  - 发展阶段
+    - 1980年代
+      - 神经网络复兴
+      - 反向传播算法
+    - 1990年代
+      - 深度学习理论
+      - 支持向量机
+  - 突破阶段
+    - 2010年代
+      - AlphaGo 战胜人类
+      - 深度学习爆发
+      - Transformer 架构
+    - 2020年代
+      - GPT 系列模型
+      - 多模态大模型
+      - AGI 探索</textarea>
+      </div>
+      <div class="button-group">
+        <button onclick="renderMindmap()">渲染思维导图</button>
+        <button onclick="clearEditor()">清空</button>
+      </div>
+    </div>
+
+    <div class="preview-panel">
+      <div class="panel-header">思维导图预览</div>
+      <div id="mindmap-preview" class="mindmap-container"></div>
+    </div>
+  </div>
+
+  <script src="mindmap-renderer.js"></script>
+  <script>
+    var renderer = null;
+
+    function init() {
+      var container = document.getElementById('mindmap-preview');
+      renderer = new MindmapRenderer({
+        container: container
+      });
+      renderMindmap();
+    }
+
+    function renderMindmap() {
+      if (!renderer) {
+        init();
+        return;
+      }
+      var markdown = document.getElementById('markdown-input').value;
+      renderer.render(markdown);
+    }
+
+    function clearEditor() {
+      document.getElementById('markdown-input').value = '';
+      if (renderer) {
+        renderer.render('');
+      }
+    }
+
+    window.onload = function() {
+      init();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+/**
+ * Miniblink 兼容的思维导图样式
+ * 仅使用 Chrome 49 支持的 CSS 属性
+ * 使用 -webkit- 前缀确保兼容性
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.mindmap-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: #ffffff;
+  padding: 20px;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.mindmap-empty {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 40px;
+}
+
+.mindmap-node-wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.mindmap-node {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 4px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+}
+
+.mindmap-node:hover {
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  -webkit-transform: translateY(-1px);
+  transform: translateY(-1px);
+}
+
+.root-node {
+  font-size: 18px;
+  font-weight: bold;
+  background: #ffffff;
+  border: 2px solid #333;
+  padding: 12px 24px;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.branch-node {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 18px;
+}
+
+.leaf-node {
+  font-size: 13px;
+  padding: 6px 14px;
+}
+
+.branch-node[data-color-index="0"] {
+  background: #FF6B6B;
+  color: #fff;
+  border-color: #FF6B6B;
+}
+
+.branch-node[data-color-index="1"] {
+  background: #4ECDC4;
+  color: #fff;
+  border-color: #4ECDC4;
+}
+
+.branch-node[data-color-index="2"] {
+  background: #45B7D1;
+  color: #fff;
+  border-color: #45B7D1;
+}
+
+.branch-node[data-color-index="3"] {
+  background: #FFA07A;
+  color: #fff;
+  border-color: #FFA07A;
+}
+
+.branch-node[data-color-index="4"] {
+  background: #98D8C8;
+  color: #fff;
+  border-color: #98D8C8;
+}
+
+.branch-node[data-color-index="5"] {
+  background: #F7DC6F;
+  color: #333;
+  border-color: #F7DC6F;
+}
+
+.branch-node[data-color-index="6"] {
+  background: #BB8FCE;
+  color: #fff;
+  border-color: #BB8FCE;
+}
+
+.branch-node[data-color-index="7"] {
+  background: #85C1E2;
+  color: #fff;
+  border-color: #85C1E2;
+}
+
+.leaf-node[data-color-index="0"] {
+  background: #FFE5E5;
+  color: #C0392B;
+  border-color: #FF6B6B;
+}
+
+.leaf-node[data-color-index="1"] {
+  background: #E0F7F5;
+  color: #16A085;
+  border-color: #4ECDC4;
+}
+
+.leaf-node[data-color-index="2"] {
+  background: #E3F2FD;
+  color: #1976D2;
+  border-color: #45B7D1;
+}
+
+.leaf-node[data-color-index="3"] {
+  background: #FFF0E6;
+  color: #D35400;
+  border-color: #FFA07A;
+}
+
+.leaf-node[data-color-index="4"] {
+  background: #E8F8F5;
+  color: #117A65;
+  border-color: #98D8C8;
+}
+
+.leaf-node[data-color-index="5"] {
+  background: #FEF9E7;
+  color: #7D6608;
+  border-color: #F7DC6F;
+}
+
+.leaf-node[data-color-index="6"] {
+  background: #F4ECF7;
+  color: #6C3483;
+  border-color: #BB8FCE;
+}
+
+.leaf-node[data-color-index="7"] {
+  background: #EBF5FB;
+  color: #21618C;
+  border-color: #85C1E2;
+}
+
+.mindmap-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.expand-btn {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 14px;
+  text-align: center;
+  margin-right: 6px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  font-size: 12px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.expand-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mindmap-children {
+  margin-left: 40px;
+  padding-left: 0;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  flex-direction: column;
+  position: relative;
+}
+
+.mindmap-children > .mindmap-node-wrapper:before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  width: 40px;
+  height: 2px;
+  background: #ddd;
+  margin-top: -1px;
+}
+
+.mindmap-children:after {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ddd;
+}
+
+.mindmap-children.single-child:after {
+  display: none;
+}
+
+.mindmap-children > .mindmap-node-wrapper:first-child:before {
+  top: 50%;
+}
+
+.mindmap-children > .mindmap-node-wrapper:last-child:before {
+  top: 50%;
+}
+
+.mindmap-node-wrapper.collapsed > .mindmap-children {
+  display: none;
+}
+
+.branch-node[data-color-index="0"] ~ .mindmap-children:after {
+  background: #FF6B6B;
+}
+
+.branch-node[data-color-index="0"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #FF6B6B;
+}
+
+.branch-node[data-color-index="1"] ~ .mindmap-children:after {
+  background: #4ECDC4;
+}
+
+.branch-node[data-color-index="1"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #4ECDC4;
+}
+
+.branch-node[data-color-index="2"] ~ .mindmap-children:after {
+  background: #45B7D1;
+}
+
+.branch-node[data-color-index="2"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #45B7D1;
+}
+
+.branch-node[data-color-index="3"] ~ .mindmap-children:after {
+  background: #FFA07A;
+}
+
+.branch-node[data-color-index="3"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #FFA07A;
+}
+
+.branch-node[data-color-index="4"] ~ .mindmap-children:after {
+  background: #98D8C8;
+}
+
+.branch-node[data-color-index="4"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #98D8C8;
+}
+
+.branch-node[data-color-index="5"] ~ .mindmap-children:after {
+  background: #F7DC6F;
+}
+
+.branch-node[data-color-index="5"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #F7DC6F;
+}
+
+.branch-node[data-color-index="6"] ~ .mindmap-children:after {
+  background: #BB8FCE;
+}
+
+.branch-node[data-color-index="6"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #BB8FCE;
+}
+
+.branch-node[data-color-index="7"] ~ .mindmap-children:after {
+  background: #85C1E2;
+}
+
+.branch-node[data-color-index="7"] ~ .mindmap-children > .mindmap-node-wrapper:before {
+  background: #85C1E2;
+}

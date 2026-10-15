@@ -1,0 +1,45 @@
+# Dependencies
+frontend/node_modules/
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.pytest_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+backend/data/
+
+# Generated files
+backend/static/
+backend/videos/
+backend/audio_files/
+backend/*.mp4
+backend/*.wav
+backend/*.mp3
+backend/*.pcm
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Build
+frontend/dist/
+frontend/build/

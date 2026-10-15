@@ -1,0 +1,8 @@
+# 联网搜索功能依赖
+
+# DuckDuckGo 搜索（免费）
+# 注意：使用最新版本
+duckduckgo-search>=6.0.0
+
+# 已有依赖（无需额外安装）
+# httpx - 用于 Jina Reader API 调用
